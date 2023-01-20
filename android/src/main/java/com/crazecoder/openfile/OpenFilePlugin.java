@@ -108,7 +108,7 @@ public class OpenFilePlugin implements MethodCallHandler
                 }
                 if (hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     if (TYPE_STRING_APK.equals(typeString)) {
-                        openApkFile();
+                        //openApkFile();
                         return;
                     }
                     startActivity();
@@ -228,8 +228,10 @@ public class OpenFilePlugin implements MethodCallHandler
                 return "application/vnd.google-earth.kml+xml";
             case "gpx":
                 return "application/gpx+xml";
+                /*
             case "apk":
                 return TYPE_STRING_APK;
+                */
             case "asf":
                 return "video/x-ms-asf";
             case "avi":
@@ -362,6 +364,7 @@ public class OpenFilePlugin implements MethodCallHandler
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void openApkFile() {
+        /*
         if (!canInstallApk()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 startInstallPermissionSettingActivity();
@@ -372,14 +375,18 @@ public class OpenFilePlugin implements MethodCallHandler
         } else {
             startActivity();
         }
+        */
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     private boolean canInstallApk() {
+        return false;
+        /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return activity.getPackageManager().canRequestPackageInstalls();
         }
         return hasPermission(Manifest.permission.REQUEST_INSTALL_PACKAGES);
+        */
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -398,7 +405,7 @@ public class OpenFilePlugin implements MethodCallHandler
         if (requestCode != REQUEST_CODE) return false;
         if (hasPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
                 && TYPE_STRING_APK.equals(typeString)) {
-            openApkFile();
+            //openApkFile();
             return false;
         }
         for (String string : strings) {
@@ -415,11 +422,13 @@ public class OpenFilePlugin implements MethodCallHandler
     @Override
     public boolean onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == RESULT_CODE) {
+            /*
             if (canInstallApk()) {
                 startActivity();
             } else {
                 result(-3, "Permission denied: " + Manifest.permission.REQUEST_INSTALL_PACKAGES);
             }
+            */
         }
         return false;
     }
